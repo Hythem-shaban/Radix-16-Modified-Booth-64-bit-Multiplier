@@ -4,14 +4,14 @@ A 64-bit combinational multiplier implemented in **SystemVerilog HDL** and synth
 
 *Note that This project is part of my graduation project which was to design a RISC-V processor capable of running Linux-based OS.*
 
-# Preliminaries
+## Preliminaries
 One of the challenges in VLSI design is to design efficient and fast multipliers, which are the core components of many arithmetic operations.
 In general, an N × N multiplier multiplies two N-bit numbers and produces a 2N-bit result.
 Signed and unsigned multiplication differ. For example, consider 0xFE × 0xFD. If these 8-bit numbers are interpreted as signed integers, they represent −2 and −3, so the 16-bit product is 0x0006. If these numbers are interpreted as unsigned integers, the 16-bit product is 0xFB06. Notice that, in either case, the least significant byte is 0x06.
 M × N-bit multiplication P = Y × X can be viewed as forming N partial products of M bits each, and then summing the appropriately shifted partial products to produce an M + N-bit result P.
 
 
-# Proposed Algorithm
+## Proposed Algorithm
 
 To improve the speed performance of multiplication, the number of partial products have been reduced by using **Radix-16 Booth Algorithm** and for reducing the delay of summation of partial products **Wallace Tree** Structure has been used. These partial products are summed using a compressor in the structure of Wallace Tree. We used eight 4-2 compressors arranged in 4 levels. CLA has been used for final results where CLA indicates carry look ahead adder that
 ahead carry of compressor.
@@ -91,7 +91,8 @@ To perform unsigned multiplication, we append a zero at MSB of the operand to be
 
 ### 4-Levels Wallace tree using 4-2 Compressor
 To accelerate the speed of the whole adder array, the partial products need to be compressed. 4-2 compressor is the most frequently used component during the compressing of partial products. Its structure is shown in figure below.
-<img src="/images/Compressor.png" width="300"/>
+![alt text](/images/Compressor.png)
+
 
 There are 4 partial product input signals to the 4-2 compressor. They are In1:In4, Cin is the carry input of the adjacent compressor; sum is pseudo-sum; Carry and Cout are carry output, they have the same weights. The independence of input carry and output carry can insure the partial product add separately at the same time.
 The four inputs In1, In2, In3, and In4, and the output sum have the same weight. The output carry is weighted one binary bit order higher.
